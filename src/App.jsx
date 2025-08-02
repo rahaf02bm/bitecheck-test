@@ -1,20 +1,20 @@
-import React from 'react'
-import Navbar from './component/navbar/navbar.jsx'
-import './index.css'
-// import { Routes, Route } from 'react-router-dom'
-import Home from './pages/home/home'
-// import PlaceReview from './pages/placereview/placereview'
-// import Restaurant from './pages/home/restaurant/restaurant'
-import { useState } from 'react'
-import Loginup from './component/loginup/loginup.jsx'
+import React from "react";
+import Navbar from "./component/navbar/navbar.jsx";
+import "./index.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/home/home";
+import PlaceReview from "./pages/placereview/placereview.jsx";
+import Restaurant from "./pages/reasturant/reasturant.jsx";
+import { useState } from "react";
+import Loginup from "./component/loginup/loginup.jsx";
+import Footer from "./component/footer/footer.jsx";
 
 const App = () => {
-
-  const {showloginup, setShowloginup} = useState(false)
+  const { showloginup, setShowloginup } = useState(false);
 
   return (
     <>
-    {showloginup?<Loginup setShowloginup={setShowloginup} />:<></>}
+      {showloginup ? <Loginup setShowloginup={setShowloginup} /> : <></>}
       <div className="app">
         <Navbar setShowloginup={setShowloginup} />
         <Routes>
@@ -23,10 +23,9 @@ const App = () => {
           <Route path="/restaurant" element={<Restaurant />} />
         </Routes>
       </div>
-      <footer />
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
-
+export default App;
