@@ -1,0 +1,36 @@
+.navbar{
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-menu{
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    color: bisque;
+    font-size: 18px;
+}
+.navbar-right{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.navbar button{
+background: transparent;
+font-size: 20px;
+color: #000;
+bottom: 1px solid tomato;
+padding: 10px 20px;
+border-radius: 50px;
+cursor: pointer;
+transition: 0.3s;
+}
+.navbar button:hover{
+    background: #f0f0f0;
+    color: #000;
+}
+.navbar.active{
+  padding-bottom: 2px ;
+  border-bottom: 2px ;
+}
