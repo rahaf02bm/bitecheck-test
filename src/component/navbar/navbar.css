@@ -4,24 +4,29 @@
     justify-content: space-between;
     align-items: center;
 }
+.navbar .logo{
+    width: 150px;
+
+}
+
 .navbar-menu{
     display: flex;
     gap: 20px;
     list-style: none;
-    color: bisque;
+    color: rgb(67, 58, 47);
     font-size: 18px;
 }
 .navbar-right{
     display: flex;
-    gap: 20px;
+    gap: 40px;
     align-items: center;
 }
 .navbar button{
 background: transparent;
-font-size: 20px;
+font-size: 60px;
 color: #000;
 bottom: 1px solid tomato;
-padding: 10px 20px;
+padding: 10px 30px;
 border-radius: 50px;
 cursor: pointer;
 transition: 0.3s;
@@ -32,5 +37,20 @@ transition: 0.3s;
 }
 .navbar.active{
   padding-bottom: 2px ;
-  border-bottom: 2px ;
+  border-bottom: 2px splid #462e2e;
+}
+.navbar li{
+    cursor: pointer;
+}   
+.navbar-search-icon{
+    position: relative;
+}
+.navbar-search-icon.dot{
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: red;
+    border-radius: 50%;
 }

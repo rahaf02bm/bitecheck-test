@@ -1,16 +1,16 @@
 import React from "react";
-import Navbar from "./component/navbar/navbar.jsx";
+import Navbar from "./component/navbar/navbar";
 import "./index.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/home";
-import PlaceReview from "./pages/placereview/placereview.jsx";
-import Restaurant from "./pages/reasturant/reasturant.jsx";
+import PlaceReview from "./pages/placereview/placereview";
+import Restaurant from "./pages/reasturant/reasturant";
 import { useState } from "react";
-import Loginup from "./component/loginup/loginup.jsx";
-import Footer from "./component/footer/footer.jsx";
-
+import Loginup from "./component/loginup/loginup";
+import Footer from "./component/footer/footer";
+import { assets } from "./assets/assets";
 const App = () => {
-  const { showloginup, setShowloginup } = useState(false);
+  const [showloginup, setShowloginup] = useState(false);
 
   return (
     <>
