@@ -17,7 +17,9 @@ import logout_icon from './logout_icon.png'
 import ddlogo_icon from './ddlogo_icon.jpeg'
 import bklogo_icon from './bklogo_icon.jpeg'
 import phlogo_icon from './phlogo_icon.jpeg'
-
+import food_1 from "./bklogo_icon.jpeg"
+import food_2 from "./ddlogo_icon.jpeg"
+import food_3 from "./phlogo_icon.jpeg"
 export const assets = {
   logo_icon,
   header_icon,
@@ -39,3 +41,39 @@ export const assets = {
   bklogo_icon,
   phlogo_icon,
 }
+export const menu_list = [
+  {
+    menu_name: "Burger King",
+    menu_image: assets.bklogo_icon
+  },
+  {
+    menu_name: "Dunkin' Donuts",
+    menu_image: assets.ddlogo_icon
+  },
+  {
+    menu_name: "Pizza Hut",
+    menu_image: assets.phlogo_icon
+  }
+]
+export const food_list = [
+    {
+        _id: "1",
+        name: "burger king",
+        image: food_1,
+        description: "Fast food restaurant",
+        category: "burger"
+    },
+    {
+        _id: "2",
+        name: "dunkin donuts",
+        image: food_2,
+        description: "coffee and desserts",
+        category: "cafe"
+    }, {
+        _id: "3",
+        name: "pizza hut",
+        image: food_3,
+        description: "Italian restaurant",
+        category: "Italian"
+    }
+  ]

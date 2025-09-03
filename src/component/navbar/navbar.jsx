@@ -15,7 +15,6 @@ const Navbar = ({setShowloginup}) => {
       <div className='navbar-right'></div>
        <img src={assets.search_icon} alt="" />
        <div className='navbar-search-icon'></div>
-      <div className='dot'></div>
       <button onClick={() => setShowloginup(true)}>sign in</button>
     </div>
     

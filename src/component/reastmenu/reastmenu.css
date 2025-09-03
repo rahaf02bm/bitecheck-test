@@ -1,9 +1,41 @@
-.bg-beige {
-  background-color: #f5f5dc;
+.explor-menu-list {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
-.text-brown {
-  color: #5C4033;
+
+.explor-menu-item {
+  border: 1px solid #faca7eb3;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  width: 140px;        
+  text-align: center;  
+  background: #dac3b2;
 }
-.bg-orange {
-  background-color: #FFA500;
+
+.explor-menu-item:hover {
+  transform: scale(1.05);
+}
+
+.explor-menu-item img {
+  width: 80px;       
+  height: 80px;
+  object-fit: contain;
+  margin-top: 16px;
+}
+
+.explor-menu-item p {
+  margin: 8px 0 16px 0;
+  padding: 0 8px;
+  font-weight: bold;  
+}
+.explor-resturant h1,
+.explor-resturant .explor-menutext {
+  text-align: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }

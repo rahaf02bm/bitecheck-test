@@ -5,6 +5,7 @@
 }
 body{
   min-height: 100vh;
+  background-color: rgb(218, 206, 189);
 }
 a{
   text-decoration: none;
