@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./placereview.css";
 import { food_list } from "../../assets/assets";
+import StarRating from "../../component/star/StarRating";
 
 const PlaceReview = () => {
-  const restaurants = food_list.map((food) => food.name);
   const [reviews, setReviews] = useState(
-    restaurants.map(() => ({ service: 0, food: 0, cleanliness: 0, comment: "" }))
+    food_list.map(() => ({ service: 0, food: 0, cleanliness: 0, comment: "" }))
   );
 
   const handleChange = (index, field, value) => {
@@ -20,53 +20,45 @@ const PlaceReview = () => {
   };
 
   return (
-    <div className="p-6 bg-beige min-h-screen">
-      <h1 className="text-3xl font-bold text-brown mb-6">Evaluate Restaurants</h1>
+    <div className="review-page">
+      <h1 className="review-title">Evaluate Restaurants</h1>
 
-      {restaurants.map((restaurant, index) => (
-        <div
-          key={index}
-          className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-orange-300"
-        >
-          <h2 className="text-xl font-semibold text-orange-600 mb-4">{restaurant}</h2>
+      {food_list.map((restaurant, index) => (
+        <div key={index} className="review-card">
+          <div style={{ display: "flex", alignItems: "center", marginBottom: 10 }}>
+            <img
+              src={restaurant.image}
+              alt={restaurant.name}
+              className="review-card-img"
+            />
+            <h2>{restaurant.name}</h2>
+          </div>
 
-          <label className="block mb-2">
+          <label>
             Service:
-            <input
-              type="number"
-              min="1"
-              max="5"
-              value={reviews[index].service}
-              onChange={(e) => handleChange(index, "service", e.target.value)}
-              className="ml-2 p-1 border rounded"
+            <StarRating
+              rating={reviews[index].service}
+              onChange={(value) => handleChange(index, "service", value)}
             />
           </label>
 
-          <label className="block mb-2">
+          <label>
             Food:
-            <input
-              type="number"
-              min="1"
-              max="5"
-              value={reviews[index].food}
-              onChange={(e) => handleChange(index, "food", e.target.value)}
-              className="ml-2 p-1 border rounded"
+            <StarRating
+              rating={reviews[index].food}
+              onChange={(value) => handleChange(index, "food", value)}
             />
           </label>
 
-          <label className="block mb-2">
+          <label>
             Cleanliness:
-            <input
-              type="number"
-              min="1"
-              max="5"
-              value={reviews[index].cleanliness}
-              onChange={(e) => handleChange(index, "cleanliness", e.target.value)}
-              className="ml-2 p-1 border rounded"
+            <StarRating
+              rating={reviews[index].cleanliness}
+              onChange={(value) => handleChange(index, "cleanliness", value)}
             />
           </label>
 
-          <label className="block mb-2">
+          <label>
             Comment:
             <textarea
               value={reviews[index].comment}
@@ -78,10 +70,7 @@ const PlaceReview = () => {
         </div>
       ))}
 
-      <button
-        onClick={handleSubmit}
-        className="bg-orange-500 text-white px-6 py-2 rounded-xl shadow hover:bg-orange-600"
-      >
+      <button onClick={handleSubmit} className="submit-btn">
         Submit Reviews
       </button>
     </div>
