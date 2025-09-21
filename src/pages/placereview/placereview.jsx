@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "./placereview.css";
 import { food_list } from "../../assets/assets";
 import StarRating from "../../component/star/StarRating";
+import { useNavigate } from "react-router-dom";
 
 const PlaceReview = () => {
   const [reviews, setReviews] = useState(
     food_list.map(() => ({ service: 0, food: 0, cleanliness: 0, comment: "" }))
   );
+  const navigate = useNavigate();
 
   const handleChange = (index, field, value) => {
     const newReviews = [...reviews];
@@ -70,11 +72,18 @@ const PlaceReview = () => {
         </div>
       ))}
 
-      <button onClick={handleSubmit} className="submit-btn">
-        Submit Reviews
-      </button>
+           <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginTop: "16px" }}>
+        <button onClick={handleSubmit} className="submit-btn">
+          Submit Reviews
+        </button>
+        <button
+          className="submit-btn"
+          onClick={() => navigate("/allreview")}
+        >
+          See All Reviews
+        </button>
+      </div>
     </div>
   );
 };
-
 export default PlaceReview;

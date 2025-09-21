@@ -1,0 +1,122 @@
+/* Overlay background */
+.loginup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(220, 180, 136, 0.85); /* beige overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Login form container */
+.loginup-container {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  padding: 32px 28px;
+  min-width: 320px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+
+/* Title and close icon */
+.logintitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.logintitle h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4b2e2e;
+  margin: 0;
+}
+
+.logintitle img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.logintitle img:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Input fields */
+.login-inputs input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #d4b886;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9f6f2;
+  transition: border 0.2s;
+}
+
+.login-inputs input:focus {
+  border-color: #ff6600;
+  outline: none;
+}
+
+/* Button */
+.loginup-container button {
+  background: #ff6600;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.loginup-container button:hover {
+  background: #e65c00;
+}
+
+/* Terms and conditions */
+.login.condition {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #4b2e2e;
+  margin-bottom: 8px;
+}
+
+.login.condition input[type="checkbox"] {
+  accent-color: #ff6600;
+}
+
+/* Switch between login/signup */
+.loginup-container p {
+  text-align: center;
+  font-size: 1rem;
+  color: #4b2e2e;
+  margin-top: 8px;
+}
+
+.loginup-container span {
+  color: #ff6600;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 4px;
+  transition: text-decoration 0.2s;
+}
+
+.loginup-container span:hover {
+  text-decoration: underline;
+}
