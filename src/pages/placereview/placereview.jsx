@@ -6,13 +6,27 @@ import { useNavigate } from "react-router-dom";
 
 const PlaceReview = () => {
   const [reviews, setReviews] = useState(
-    food_list.map(() => ({ service: 0, food: 0, cleanliness: 0, comment: "" }))
+    food_list.map(() => ({
+      service: 0,
+      food: 0,
+      cleanliness: 0,
+      comment: "",
+      photo: null,
+      photoPreview: null,
+    }))
   );
   const navigate = useNavigate();
 
   const handleChange = (index, field, value) => {
     const newReviews = [...reviews];
     newReviews[index][field] = value;
+    setReviews(newReviews);
+  };
+
+  const handlePhotoChange = (index, file) => {
+    const newReviews = [...reviews];
+    newReviews[index].photo = file;
+    newReviews[index].photoPreview = file ? URL.createObjectURL(file) : null;
     setReviews(newReviews);
   };
 
@@ -67,22 +81,84 @@ const PlaceReview = () => {
               onChange={(e) => handleChange(index, "comment", e.target.value)}
               className="ml-2 p-2 border rounded w-full"
               placeholder="Write your feedback..."
+              style={{
+                marginTop: "6px",
+                border: "1.5px solid #ffb347",
+                borderRadius: "8px",
+                background: "#f7ecd7",
+                color: "#4b2e2e"
+              }}
             />
           </label>
+
+          <label
+            style={{
+              display: "block",
+              marginTop: "18px",
+              marginBottom: "8px",
+              fontWeight: "500",
+              color: "#a0522d"
+            }}
+          >
+            Upload a photo:
+            <div
+              style={{
+                background: "#f7ecd7",
+                border: "2px dashed #ffb347",
+                borderRadius: "12px",
+                padding: "18px",
+                marginTop: "8px",
+                display: "flex",
+                alignItems: "center",
+                gap: "18px",
+                justifyContent: "flex-start",
+                cursor: "pointer",
+                transition: "border-color 0.2s"
+              }}
+              onClick={() => document.getElementById(`photo-input-${index}`).click()}
+              onMouseOver={e => (e.currentTarget.style.borderColor = "#ff6600")}
+              onMouseOut={e => (e.currentTarget.style.borderColor = "#ffb347")}
+            >
+              <input
+                id={`photo-input-${index}`}
+                type="file"
+                accept="image/*"
+                onChange={e => handlePhotoChange(index, e.target.files[0])}
+                style={{ display: "none" }}
+              />
+              <span style={{ color: "#d2691e", fontWeight: "bold" }}>
+                {reviews[index].photo ? "Photo Selected" : "Click to choose a photo"}
+              </span>
+              {reviews[index].photoPreview && (
+                <img
+                  src={reviews[index].photoPreview}
+                  alt="Preview"
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                    border: "2px solid #ff6600",
+                    background: "#fff8ee"
+                  }}
+                />
+              )}
+            </div>
+          </label>
+
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginTop: "16px" }}>
+            <button onClick={handleSubmit} className="submit-btn">
+              Submit Reviews
+            </button>
+            <button
+              className="submit-btn"
+              onClick={() => navigate("/allreview")}
+            >
+              See All Reviews
+            </button>
+          </div>
         </div>
       ))}
-
-           <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginTop: "16px" }}>
-        <button onClick={handleSubmit} className="submit-btn">
-          Submit Reviews
-        </button>
-        <button
-          className="submit-btn"
-          onClick={() => navigate("/allreview")}
-        >
-          See All Reviews
-        </button>
-      </div>
     </div>
   );
 };
