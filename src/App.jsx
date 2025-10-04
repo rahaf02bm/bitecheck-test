@@ -8,26 +8,25 @@ import AllReview from "./pages/allreview/allreview";
 import Loginup from "./component/loginup/loginup";
 import LoginPage from "./component/loginup/loginPage";
 import Footer from "./component/footer/footer";
+import { useAuth } from "./context/AuthContext"; // <-- import context
 import { signOut } from "./lib/appwrite";
 
 const App = () => {
   const [showloginup, setShowloginup] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
   const navigate = useNavigate();
+
+  // Use global auth state
+  const { user, setUser, loading, logout } = useAuth();
 
   // Call this after successful signup/signin
   const handleAuthSuccess = (usernameValue) => {
-    setIsLoggedIn(true);
-    setUsername(usernameValue);
+    setUser({ ...user, username: usernameValue }); // update context
     setShowloginup(false);
     navigate("/"); // Redirect to home after login/signup
   };
 
   const handleSignOut = async () => {
-    await signOut(); // Remove Appwrite session
-    setIsLoggedIn(false);
-    setUsername("");
+    await logout(); // Use context logout
     navigate("/"); // Redirect to home after sign out
   };
 
@@ -42,8 +41,8 @@ const App = () => {
       <div className="app">
         <Navbar
           setShowloginup={setShowloginup}
-          isLoggedIn={isLoggedIn}
-          username={username}
+          isLoggedIn={!!user}
+          username={user?.username || ""}
           handleSignOut={handleSignOut}
         />
         <Routes>

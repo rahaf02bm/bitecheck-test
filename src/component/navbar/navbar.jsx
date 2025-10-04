@@ -1,16 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { assets } from "../../assets/assets";
 
 const Navbar = ({ setShowloginup, isLoggedIn, username, handleSignOut }) => {
   const [menu, setMenu] = React.useState("home");
+  const navigate = useNavigate();
 
   return (
     <div className="navbar">
       <img src={assets.logo_icon} alt="logo" className="logo" />
       <ul className="navbar-menu">
         <li
-          onClick={() => setMenu("home")}
+          onClick={() => {
+            setMenu("home");
+            navigate("/");
+          }}
           className={menu === "home" ? "active" : ""}
         >
           Home
@@ -39,12 +44,10 @@ const Navbar = ({ setShowloginup, isLoggedIn, username, handleSignOut }) => {
         <div className="navbar-search-icon"></div>
         {isLoggedIn ? (
           <>
-            {/* Show username and sign out button when logged in */}
             <span className="navbar-username ">{username}</span>
             <button onClick={handleSignOut}>Sign Out</button>
           </>
         ) : (
-          // Show create account button when not logged in
           <button onClick={() => setShowloginup(true)}>Create Account</button>
         )}
       </div>

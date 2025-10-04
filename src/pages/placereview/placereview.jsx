@@ -3,6 +3,7 @@ import "./placereview.css";
 import { food_list } from "../../assets/assets";
 import StarRating from "../../component/star/StarRating";
 import { useNavigate } from "react-router-dom";
+import { createReview } from "../../lib/appwrite";
 
 const PlaceReview = () => {
   const [reviews, setReviews] = useState(
@@ -30,9 +31,36 @@ const PlaceReview = () => {
     setReviews(newReviews);
   };
 
-  const handleSubmit = () => {
-    console.log("Submitted reviews:", reviews);
-    alert("Thank you for your reviews!");
+  const handleSubmit = async () => {
+    try {
+      for (let i = 0; i < reviews.length; i++) {
+        const review = reviews[i];
+        // Only submit if at least one field is filled
+        if (
+          review.service > 0 ||
+          review.food > 0 ||
+          review.cleanliness > 0 ||
+          review.comment.trim() !== "" ||
+          review.photo
+        ) {
+          let photoUrl = null;
+          if (review.photo) {
+            photoUrl = review.photo.name;
+          }
+          await createReview({
+            restaurantId: food_list[i].id || food_list[i].name,
+            service: review.service,
+            food: review.food,
+            cleanliness: review.cleanliness,
+            comment: review.comment,
+            photo: photoUrl,
+          });
+        }
+      }
+      alert("Thank you for your reviews!");
+    } catch (error) {
+      alert("Failed to submit reviews: " + error.message);
+    }
   };
 
   return (
@@ -41,7 +69,9 @@ const PlaceReview = () => {
 
       {food_list.map((restaurant, index) => (
         <div key={index} className="review-card">
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 10 }}>
+          <div
+            style={{ display: "flex", alignItems: "center", marginBottom: 10 }}
+          >
             <img
               src={restaurant.image}
               alt={restaurant.name}
@@ -86,7 +116,7 @@ const PlaceReview = () => {
                 border: "1.5px solid #ffb347",
                 borderRadius: "8px",
                 background: "#f7ecd7",
-                color: "#4b2e2e"
+                color: "#4b2e2e",
               }}
             />
           </label>
@@ -97,7 +127,7 @@ const PlaceReview = () => {
               marginTop: "18px",
               marginBottom: "8px",
               fontWeight: "500",
-              color: "#a0522d"
+              color: "#a0522d",
             }}
           >
             Upload a photo:
@@ -113,21 +143,29 @@ const PlaceReview = () => {
                 gap: "18px",
                 justifyContent: "flex-start",
                 cursor: "pointer",
-                transition: "border-color 0.2s"
+                transition: "border-color 0.2s",
               }}
-              onClick={() => document.getElementById(`photo-input-${index}`).click()}
-              onMouseOver={e => (e.currentTarget.style.borderColor = "#ff6600")}
-              onMouseOut={e => (e.currentTarget.style.borderColor = "#ffb347")}
+              onClick={() =>
+                document.getElementById(`photo-input-${index}`).click()
+              }
+              onMouseOver={(e) =>
+                (e.currentTarget.style.borderColor = "#ff6600")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.borderColor = "#ffb347")
+              }
             >
               <input
                 id={`photo-input-${index}`}
                 type="file"
                 accept="image/*"
-                onChange={e => handlePhotoChange(index, e.target.files[0])}
+                onChange={(e) => handlePhotoChange(index, e.target.files[0])}
                 style={{ display: "none" }}
               />
               <span style={{ color: "#d2691e", fontWeight: "bold" }}>
-                {reviews[index].photo ? "Photo Selected" : "Click to choose a photo"}
+                {reviews[index].photo
+                  ? "Photo Selected"
+                  : "Click to choose a photo"}
               </span>
               {reviews[index].photoPreview && (
                 <img
@@ -139,14 +177,21 @@ const PlaceReview = () => {
                     objectFit: "cover",
                     borderRadius: "8px",
                     border: "2px solid #ff6600",
-                    background: "#fff8ee"
+                    background: "#fff8ee",
                   }}
                 />
               )}
             </div>
           </label>
 
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginTop: "16px" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "16px",
+              justifyContent: "center",
+              marginTop: "16px",
+            }}
+          >
             <button onClick={handleSubmit} className="submit-btn">
               Submit Reviews
             </button>

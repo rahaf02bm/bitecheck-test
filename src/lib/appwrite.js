@@ -7,6 +7,7 @@ export const config = {
   projectId: "68dd2119002b85399dfc",
   databaseId: "68dd3101002740f6ada3",
   userCollectionId: "users",
+  reviewsCollectionId: "reviews",
 };
 
 client.setEndpoint(config.endpoint).setProject(config.projectId);
@@ -66,8 +67,6 @@ export const signOut = async () => {
   }
 };
 
-
-
 // Get Current User
 export async function getCurrentUser() {
   try {
@@ -88,6 +87,79 @@ export async function getCurrentUser() {
       ...currentUser.documents[0],
       name: currentAccount.name,
     };
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function createReview({
+  restaurantId,
+  service,
+  food,
+  cleanliness,
+  comment,
+  photo,
+}) {
+  try {
+    const currentUser = await getCurrentUser();
+    if (!currentUser) throw new Error("User not logged in");
+
+    const reviewDoc = await databases.createDocument(
+      config.databaseId,
+      config.reviewsCollectionId,
+      ID.unique(),
+      {
+        restaurantId,
+        userId: currentUser.userId,
+        service,
+        food,
+        cleanliness,
+        comment,
+        photo, // You can store file ID or URL here
+      }
+    );
+    return reviewDoc;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getUserReviews() {
+  try {
+    const currentUser = await getCurrentUser();
+    if (!currentUser) throw new Error("User not logged in");
+
+    const response = await databases.listDocuments(
+      config.databaseId,
+      config.reviewsCollectionId,
+      [Query.equal("userId", currentUser.userId)]
+    );
+    return response.documents;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getAllReviews() {
+  try {
+    const response = await databases.listDocuments(
+      config.databaseId,
+      config.reviewsCollectionId
+    );
+    return response.documents;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getUserById(userId) {
+  try {
+    const response = await databases.listDocuments(
+      config.databaseId,
+      config.userCollectionId,
+      [Query.equal("userId", userId)]
+    );
+    return response.documents[0];
   } catch (error) {
     return null;
   }
