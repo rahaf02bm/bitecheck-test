@@ -47,7 +47,7 @@ export const menu_list = [
     menu_image: assets.bklogo_icon
   },
   {
-    menu_name: "Dunkin' Donuts",
+    menu_name: "Dunkin Donuts",
     menu_image: assets.ddlogo_icon
   },
   {

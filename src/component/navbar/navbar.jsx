@@ -27,10 +27,13 @@ const Navbar = ({ setShowloginup, isLoggedIn, username, handleSignOut }) => {
           About
         </li>
         <li
-          onClick={() => setMenu("services")}
+          onClick={() => {
+            setMenu("services");
+            navigate("/allreview");
+          }}
           className={menu === "services" ? "active" : ""}
         >
-          Services
+          Reviews
         </li>
         <li
           onClick={() => setMenu("contact")}

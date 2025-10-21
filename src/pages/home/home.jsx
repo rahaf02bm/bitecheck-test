@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <RestaurantMenu category={category} setcategory={setcategory} />
+      {/* <RestaurantMenu category={category} setcategory={setcategory} /> */}
     </div>
   );
 };

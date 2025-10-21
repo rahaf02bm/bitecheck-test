@@ -14,7 +14,7 @@ client.setEndpoint(config.endpoint).setProject(config.projectId);
 
 // Create instances
 const account = new Account(client);
-const databases = new Databases(client);
+export const databases = new Databases(client);
 
 export async function createUser(email, password, username) {
   try {

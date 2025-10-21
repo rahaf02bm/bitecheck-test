@@ -10,6 +10,7 @@ import LoginPage from "./component/loginup/loginPage";
 import Footer from "./component/footer/footer";
 import { useAuth } from "./context/AuthContext"; // <-- import context
 import { signOut } from "./lib/appwrite";
+import RestaurantMenu from "./component/reastmenu/reastmenu";
 
 const App = () => {
   const [showloginup, setShowloginup] = useState(false);
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/placereview" element={<PlaceReview />} />
           <Route path="/allreview" element={<AllReview />} />
+          <Route path="/restaurantMenu" element={<RestaurantMenu />} />
           <Route
             path="/login"
             element={<LoginPage onAuthSuccess={handleAuthSuccess} />}
